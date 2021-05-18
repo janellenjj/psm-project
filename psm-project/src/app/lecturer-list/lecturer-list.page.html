@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lecturer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <table>
+  	<tr>
+  		<th>Lecturer Name</th>
+  		<th>Faculty</th>
+  		<th>Academic Program</th>
+  		<th>Domain</th>
+      <th>Action</th>
+  	</tr>
+    
+  	<tr *ngFor="let lecturer of lecturerList">
+  		<td>{{lecturer.name}}</td>
+  		<td>{{lecturer.faculty}}</td>
+  		<td>{{lecturer.program ? (lecturer.program).name : ''}}</td>
+  		<td>{{lecturer.domain}}</td>
+      <td><ion-button (click)="selectLecturer(lecturer)">Apply</ion-button></td>
+  	</tr>
+
+
+  </table>
+
+</ion-content>

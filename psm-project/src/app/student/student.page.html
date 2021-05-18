@@ -1,0 +1,37 @@
+<div class="wrapper" style="padding: 1rem;">
+
+  <div *ngIf="userService.user">
+	<h1>Personal Details</h1>
+
+	<h3>Welcome back {{userService.user.name}}</h3>
+
+  <div style="width: 100%;display: flex;justify-content: space-around;">
+
+    <div class="modeButton" style="background:#81163F" (click)="updateDetails()">
+      Update Personal Details
+    </div>
+
+    <div class="modeButton"  style="background:#81163F" (click)="chooseSupervisor()" >
+      Apply Supervisor
+    </div>
+
+    <div *ngIf="userService.user.supervisor">
+      <div *ngIf="!(userService.user.supervisor.status != 'accept' || userProposal.status == 'submitted')" class="modeButton"  style="background:#81163F" >
+        <div (click)="proposal()">Proposal</div>
+      </div>
+    </div>
+
+
+  </div>
+
+	<div *ngIf="userService.user.supervisor">
+    <h4>Supervisor Application Status</h4>
+		<p>Supervisor: {{userSv ? userSv.name : ''}}</p>
+		<p>Status: {{userService.user.supervisor.status}}</p>
+    <a *ngIf="userService.user.supervisor.status == 'accept'" href="assets/agreement.pdf" target="_blank" >View Agreement</a>
+	</div>
+
+  </div>
+
+</div>
+

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lecturer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+	<ion-item>
+      <ion-label>Lecturer Name</ion-label>
+      <ion-input [disabled]="userService.user.role !='admin'" [(ngModel)]="lecturerName" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label>Lecturer Username</ion-label>
+      <ion-input [disabled]="userService.user.role !='admin'" [(ngModel)]="lecturerUsername" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label>Lecturer Password</ion-label>
+      <ion-input [disabled]="userService.user.role !='admin'" [(ngModel)]="lecturerPassword" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Faculty</ion-label>
+    <ion-input [disabled]="userService.user.role !='admin'" [(ngModel)]="lecturerFaculty" ></ion-input>
+  </ion-item>
+
+  <ion-item >
+    <ion-label>Academic Program</ion-label>
+    <ion-select [disabled]="userService.user.role !='admin'" *ngIf="allProgram" [(ngModel)]="lecturerProgram" >
+      <ion-select-option *ngFor="let program of allProgram" [value]="program.programId" >{{program.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Domain</ion-label>
+    <ion-select [(ngModel)]="lecturerDomain" value="Development" >
+      <ion-select-option value="Development">Development</ion-select-option>
+      <ion-select-option value="Research">Research</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Committee Member</ion-label>
+    <ion-toggle [disabled]="userService.user.role !='admin'"  [(ngModel)]="lecturerCommittee"></ion-toggle>
+  </ion-item>
+
+</ion-list>
+
+  <ion-button style="--background:#81163F" *ngIf="operation == 'create'" (click)="submit()">Add</ion-button>
+  <ion-button color="warning" *ngIf="operation == 'update'" (click)="submit()">Edit</ion-button>
+</ion-content>

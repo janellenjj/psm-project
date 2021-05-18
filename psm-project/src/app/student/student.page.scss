@@ -1,0 +1,20 @@
+.modeButton{
+  width:15rem;
+  height:5rem;
+  color: white;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: all 0.3s cubic-bezier(.17,.67,.83,.67);
+}
+
+.modeButton:hover{
+  transform: scale(1.2);
+}
+
+.modeButton.active{
+  transform: scale(1.2); 
+}

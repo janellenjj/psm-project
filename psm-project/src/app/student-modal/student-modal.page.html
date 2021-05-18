@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Student</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list> 
+	<ion-item>
+      <ion-label>Student Name</ion-label>
+      <ion-input [disabled]="role == 'student'" [(ngModel)]="studentName" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label>Student Username</ion-label>
+      <ion-input [disabled]="role == 'student'" [(ngModel)]="studentUsername" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label>Student Password</ion-label>
+      <ion-input [(ngModel)]="studentPassword" ></ion-input>
+  </ion-item>
+
+    <ion-item>
+      <ion-label>Student Matrics</ion-label>
+      <ion-input [disabled]="role == 'student'" [(ngModel)]="studentMatrics" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Student Session</ion-label>
+      <ion-select [disabled]="role == 'student'" [(ngModel)]="studentSession" >
+        <ion-select-option value="2020/2021">2020/2021</ion-select-option>
+        <ion-select-option value="2021/2022">2021/2022</ion-select-option>
+        <ion-select-option value="2022/2023">2022/2023</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Student Sem</ion-label>
+      <ion-select [disabled]="role == 'student'" [(ngModel)]="studentSem" >
+        <ion-select-option value="Sem 1">Sem 1</ion-select-option>
+        <ion-select-option value="Sem 2">Sem 2</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Student Program</ion-label>
+      <ion-select [disabled]="role == 'student'" *ngIf="allProgram" [(ngModel)]="studentProgram" >
+        <ion-select-option *ngFor="let program of allProgram" [value]="program.programId" >{{program.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Student Evaluator 1</ion-label>
+      <ion-select [disabled]="role == 'student' || operation == 'create' " *ngIf="allLecturer" [(ngModel)]="studentEvaluator1" >
+        <ion-select-option *ngFor="let lecturer of allLecturer" [value]="lecturer.lecturerId" [disabled]="studentEvaluator2 == lecturer.lecturerId" >{{lecturer.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Student Evaluator 2</ion-label>
+      <ion-select [disabled]="role == 'student' || operation == 'create' " *ngIf="allLecturer" [(ngModel)]="studentEvaluator2" >
+        <ion-select-option *ngFor="let lecturer of allLecturer" [value]="lecturer.lecturerId" [disabled]="studentEvaluator1 == lecturer.lecturerId" >{{lecturer.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+ </ion-list>
+
+  <ion-button style="--background:#81163F" *ngIf="operation == 'create'" (click)="submit()">Add</ion-button>
+  <ion-button color="warning" *ngIf="operation == 'update'" (click)="submit()">Edit</ion-button>
+</ion-content>

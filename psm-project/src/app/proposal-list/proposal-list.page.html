@@ -1,0 +1,79 @@
+<div class="wrapper" style="padding: 1rem;">
+  <h1>Proposal Lists</h1>
+
+  <div style="width: 100%;display: flex;justify-content: flex-start;align-items: center;">
+  
+    <p>Filter by Semester</p>
+    <ion-select [(ngModel)]="semesterFilter" style="margin-right: 4rem;" >
+      <ion-select-option value="all">View All</ion-select-option>
+      <ion-select-option value="1">Sem 1</ion-select-option>
+      <ion-select-option value="2">Sem 2</ion-select-option>
+    </ion-select>
+
+    <p>Filter by Session</p>
+    <ion-select [(ngModel)]="sessionFilter" >
+      <ion-select-option value="all">View All</ion-select-option>
+      <ion-select-option *ngFor="let session of sessionList" [value]="session">{{session}}</ion-select-option>
+    </ion-select>
+  </div>
+
+  <table>
+  	<tr>
+  		<th>Proposal Title</th>
+  		<th>Proposal Type</th>
+      <th>Student Name</th>
+      <th>Session</th>
+      <th>Sem</th>
+      <th>Supervisor</th>
+      <th>Evaluator 1</th>
+      <th>Evaluator 2</th>
+  		<th>Proposal Status</th>
+     	<th>Proposal Form</th>
+      <th>Action</th>
+  	</tr>
+    
+  	<tr *ngFor="let proposal of proposalList | proposal : {'field':'sem','target':semesterFilter} : {'field':'session','target':sessionFilter}">
+
+  		<td>{{proposal.title}}</td>
+  		<td>{{proposal.type}}</td>
+      <td>{{ proposal.student ? (proposal.student).name : ''}}</td>
+      <td>{{ proposal.student ? (proposal.student).session : ''}}</td>
+      <td>{{ proposal.student ? (proposal.student).sem  : ''}}</td>
+      <td>
+        <span *ngIf="proposal.student">
+          <span *ngIf="proposal.student.supervisor">
+            {{ proposal.student.supervisor.lect ? proposal.student.supervisor.lect.name : '-'}}
+          </span>
+        </span>
+      </td>
+
+      <td>
+        <span *ngIf="proposal.student">
+          <span *ngIf="proposal.student.evaluator1">
+            {{ proposal.student.evaluator1 ? proposal.student.evaluator1.name : '-'}}
+          </span>
+        </span>
+      </td>
+
+      <td>
+        <span *ngIf="proposal.student">
+          <span *ngIf="proposal.student.evaluator2">
+            {{ proposal.student.evaluator2 ? proposal.student.evaluator2.name : '-'}}
+          </span>
+        </span>
+      </td>
+
+  		<td>{{proposal.status}}</td>
+      <td>
+        <a *ngIf="proposal.formURL" [href]="proposal.formURL" target="_blank" >Download Form</a>
+      </td>
+      
+      <td style="display: flex;flex-wrap: nowrap;justify-content: flex-start;align-items: center;">
+        <ion-button size="small" color="success" (click)="viewProposal(proposal)">View</ion-button>
+        <ion-button *ngIf="userService.user.committee" size="small" color="warning" (click)="editProposal(proposal)">Edit</ion-button>
+        <ion-button *ngIf="userService.user.committee" size="small" color="danger" (click)="deleteProposal(proposal)">Delete</ion-button>
+      </td>
+  	</tr>
+
+  </table>
+</div>

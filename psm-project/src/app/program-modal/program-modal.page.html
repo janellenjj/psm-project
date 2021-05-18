@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Program</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+	<ion-item>
+      <ion-label>Program Code</ion-label>
+      <ion-input [(ngModel)]="programCode" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Program Name</ion-label>
+      <ion-input [(ngModel)]="programName" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Program Coordinator</ion-label>
+      <ion-input [(ngModel)]="programCoordinator" ></ion-input>
+    </ion-item>
+
+ </ion-list>
+
+  <ion-button style="--background:#81163F" *ngIf="operation == 'create'" (click)="submit()">Add</ion-button>
+  <ion-button color="warning" *ngIf="operation == 'update'" (click)="submit()">Edit</ion-button>
+</ion-content>

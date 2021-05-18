@@ -1,0 +1,69 @@
+<div class="wrapper" style="padding: 1rem;">
+
+	<h1>Student Lists</h1>
+
+  <ion-button *ngIf="userService.user.committee" style="--background:#81163F" (click)="addStudent()">Add New Student</ion-button>
+
+  <div style="width: 100%;display: flex;justify-content: flex-start;align-items: center;">
+
+    <p>Filter by Semester</p>
+    <ion-select [(ngModel)]="semesterFilter" style="margin-right: 4rem;">
+      <ion-select-option value="all">View All</ion-select-option>
+      <ion-select-option value="1">Sem 1</ion-select-option>
+      <ion-select-option value="2">Sem 2</ion-select-option>
+    </ion-select>
+
+    <p>Filter by Session</p>
+    <ion-select [(ngModel)]="sessionFilter" >
+      <ion-select-option value="all">View All</ion-select-option>
+      <ion-select-option *ngFor="let session of sessionList" [value]="session">{{session}}</ion-select-option>
+    </ion-select>
+  </div>
+
+  <table>
+  	<tr>
+  		<th>Student Name</th>
+  		<th>Username</th>
+  		<th>Password</th>
+  		<th>Matrics</th>
+  		<th>Session</th>
+  		<th>Sem</th>
+  		<th>Academic Program</th>
+      <th>Supervisor</th>
+      <th>Evaluator 1</th>
+      <th>Evaluator 2</th>
+      <th *ngIf="userService.user.committee">Action</th>
+  	</tr>
+
+    <tr *ngFor="let student of studentList | student : {'field':'sem','target':semesterFilter} : {'field':'session','target':sessionFilter}">
+
+  		<td>{{student.name}}</td>
+  		<td>{{student.username}}</td>
+  		<td>{{student.password}}</td>
+  		<td>{{student.matrics}}</td>
+  		<td>{{student.session}}</td>
+  		<td>{{student.sem}}</td>
+  		<td>{{student.program ? (student.program).name : ''}}</td>
+      <td>
+        <span *ngIf="student.supervisor">{{(student.supervisor.lect).name}}</span>
+        <br>
+        <ion-note *ngIf="student.supervisor">{{(student.supervisor.status)}}</ion-note>
+        <span *ngIf="!student.supervisor">-</span>
+      </td>
+      <td>
+        <span *ngIf="student.evaluator1">{{(student.evaluator1).name}}</span>
+        <span *ngIf="!student.evaluator1">-</span>
+      </td>
+      <td>
+        <span *ngIf="student.evaluator2">{{(student.evaluator2).name}}</span>
+        <span *ngIf="!student.evaluator2">-</span>
+      </td>
+      <td *ngIf="userService.user.committee">
+        <ion-button color="warning" (click)="editStudent(student)">Edit</ion-button>
+        <ion-button color="danger" (click)="deleteStudent(student)">Delete</ion-button>
+      </td>
+  	</tr>
+    
+   </table>
+
+</div>

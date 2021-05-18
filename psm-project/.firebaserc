@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "psm-project-6b235": {
+      "hosting": {
+        "app": [
+          "psm-project-6b235"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "staging": "psm-project-6b235"
+  }
+}

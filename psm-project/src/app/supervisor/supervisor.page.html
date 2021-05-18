@@ -1,0 +1,24 @@
+<div class="wrapper" style="padding: 1rem;">
+
+  <h1>Supervisor Application Lists</h1>
+  <table>
+    	<tr>
+    		<th>Student Name</th>
+    		<th>Academic Program</th>
+       	<th>Supervisor</th>
+        	<th>Action</th>
+    	</tr>
+    	<tr *ngFor="let req of svRequests">
+    		<td>{{req.student.name}}</td>
+    		<td>{{req.student.program.name}}</td>
+    		<td>{{req.lecturer.name}}</td>
+        <td>
+          <ion-button color="success" (click)="approveSupervisor(req)">Approve</ion-button>
+          <ion-button color="danger"(click)="rejectSupervisor(req)">Reject</ion-button>
+        </td>
+    	</tr>
+
+
+  </table>
+
+</div>

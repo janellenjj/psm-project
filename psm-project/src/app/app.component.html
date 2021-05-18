@@ -1,0 +1,24 @@
+<ion-app>
+	<div style="width: 100%;height: 100%; display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;">
+		<div *ngIf="!hideBar" style="width: 100%;padding: 1rem;background:#81163F;display: flex;justify-content: space-between;align-items: center;">
+			<span style="color: white;" *ngIf="userService.user">{{userService.user.name}}</span>
+
+			<!-- <ion-button mode="ios" size="small" (click)="loginStudent()">👨‍🎓</ion-button>
+			<ion-button mode="ios" size="small" (click)="loginLecturer()">👩‍🏫</ion-button> -->
+			<ion-button style="--background:black color:white;"  mode="ios" size="small" (click)="logout()">Log Out</ion-button>
+
+		</div>
+		<div style="width: 100%;height: 100%;display: flex;justify-content: flex-start;align-items: flex-start;">
+			<div *ngIf="!hideBar" style="width: 200px;height: 100%; display: flex;flex-direction: column;justify-content: space-between;align-items: center;font-size:40px;color: #81163F;background: #d9d4e3;">
+				<div style="display: flex;justify-content: flex-start;align-items: center;flex-direction: column;">
+					<a *ngFor="let link of userService.linkList" [routerLink]="link.path">
+					<ion-button mode="ios" size="small" fill="clear">{{link.label}}</ion-button>
+				</a>
+				</div>
+				<p style="font-size:10px;">Copyright © Ng Jing Jie PSM System.</p>
+
+			</div>
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</ion-app>

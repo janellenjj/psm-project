@@ -1,0 +1,47 @@
+<div class="wrapper" style="padding: 1rem;">
+
+  <h1>Lecturer Lists</h1>
+  
+  <ion-button style="--background:#81163F" *ngIf="userService.user.role =='admin'" (click)="addLecturer()">Add New Lecturer</ion-button>
+
+  <div style="width: 100%;display: flex;justify-content:flex-start;align-items: center;">
+    <p>Filter by Academic Program</p>
+    <ion-select [(ngModel)]="programFilter" style="margin-right: 4rem;">
+      <ion-select-option value="all">View All</ion-select-option>
+      <ion-select-option *ngFor="let program of programList" [value]="program.programId">{{program.name}}</ion-select-option>
+    </ion-select>
+
+    <p>Filter by Committee Members</p>
+    <ion-select [(ngModel)]="committeeFilter" >
+      <ion-select-option value="all">View All</ion-select-option>
+      <ion-select-option [value]="true">Show Committee Only</ion-select-option>
+      <ion-select-option [value]="false">Show Non-committee</ion-select-option>
+    </ion-select>
+  </div>
+  
+  <table>
+  	<tr>
+  		<th>Lecturer Name</th>
+  		<th>Username</th>
+  		<th>Password</th>
+  		<th>Faculty</th>
+  		<th>Academic Program</th>
+  		<th>Domain</th>
+  		<th>Committee Member</th>
+      <th>Action</th>
+  	</tr>
+    
+  	<tr *ngFor="let lecturer of lecturerList | lecturer : {'field':'program','target':programFilter} : {'field':'committee','target':committeeFilter}">
+  		<td>{{lecturer.name}}</td>
+  		<td>{{lecturer.username}}</td>
+  		<td>{{lecturer.password}}</td>
+  		<td>{{lecturer.faculty}}</td>
+  		<td>{{lecturer.program ? (lecturer.program).name : ''}}</td>
+  		<td>{{lecturer.domain}}</td>
+  		<td>{{lecturer.committee}}</td>
+      <td><ion-button color="warning" (click)="editLecturer(lecturer)">Edit</ion-button>
+      <ion-button color="danger" *ngIf="userService.user.role =='admin'" (click)="deleteLecturer(lecturer)">Delete</ion-button></td>
+  	</tr>
+
+  </table>
+</div>

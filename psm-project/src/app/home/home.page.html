@@ -1,0 +1,40 @@
+<div style="width: 100%;height:100%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+
+  <div style="width: 450px;height: 500px;padding: 1rem;background: white;border-radius: 1rem;display: flex;flex-direction: column;justify-content: space-around;align-items: center;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+    <img src="assets/logo.png" width="50%">
+    <h1>PSM SYSTEM</h1>
+
+    <div style="width: 100%;display: flex;justify-content: space-around;">
+
+        <div class="modeButton" [class.active] = 'loginMode == "admin"' style="background:#69140E" (click)="loginMode = 'admin'">
+        Admin
+        </div>
+
+        <div class="modeButton"  style="background:#A44200" (click)="loginMode = 'lecturer'" [class.active] = 'loginMode == "lecturer"'>
+        Lecturer
+        </div>
+
+        <div class="modeButton"  style="background:#D58936" (click)="loginMode = 'student'" [class.active] = 'loginMode == "student"'>
+        Student
+        </div>
+
+    </div>
+
+    <ion-list>
+      <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-input [(ngModel)]="usernameInput" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input [(ngModel)]="passwordInput" ></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button style="--background:#81163F" (click)="login()">Log In</ion-button>
+
+  </div>
+
+</div>

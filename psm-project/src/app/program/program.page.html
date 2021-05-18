@@ -1,0 +1,29 @@
+<div class="wrapper" style="padding: 1rem;">
+
+  <h1>Academic Program</h1>
+
+  <div style="padding-bottom: 1rem;">
+    <ion-button style="--background:#81163F;  " (click)="addProgram()">Add New Academic Program</ion-button>
+  </div>
+
+  <table style="padding-top: 1rem;">
+  <tr>
+    <th>Program Code</th>
+    <th>Program Name</th>
+    <th>Program Coordinator</th>
+    <th colspan="2">Action</th>
+  </tr>
+
+  <tr *ngFor="let program of programList">
+    <td>{{program.code}}</td>
+    <td>{{program.name}}</td>
+    <td>{{program.coordinator}}</td>
+    <td>
+      <ion-button color="warning" (click)="editProgram(program)">Edit</ion-button>
+      <ion-button color="danger" (click)="deleteProgram(program)">Delete</ion-button>
+    </td>
+  </tr>
+
+  </table>
+</div>
+

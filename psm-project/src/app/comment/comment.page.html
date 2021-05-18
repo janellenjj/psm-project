@@ -1,0 +1,39 @@
+<div class="wrapper" style="padding: 1rem;">
+
+	<div  *ngIf="proposal">
+		<p>Proposal Title :{{proposal.title}}</p>
+		<p>Proposal Type :{{proposal.type}}</p>
+		<p>Student Name :{{proposal.student ? proposal.student.name : ''}}</p>
+		<p>Proposal Status :{{proposal.status}}</p>
+		<p>Proposal Form <a *ngIf="proposal.formURL" [href]="proposal.formURL" target="_blank" >Download Proposal Form</a></p>
+	</div>
+
+	<div *ngIf="userService.user.role != 'student'">
+		<h3 >Evaluate Result</h3>
+		<div style="display: flex;justify-content: flex-start;">
+			<ion-item style="width: 100%" *ngIf="proposal">
+			<ion-label>Result</ion-label>
+			<ion-select [disabled]="!(userService.user.userId == proposal.student.evaluator1.lect_id || userService.user.userId == proposal.student.evaluator2.lect_id)" [(ngModel)]="evResult" >
+				<ion-select-option value="Accepted">Accepted</ion-select-option>
+				<ion-select-option value="Accepted With Condition">Accepted With Condition</ion-select-option>
+				<ion-select-option value="Rejected">Rejected</ion-select-option>
+			</ion-select>
+		</ion-item>
+		<ion-button *ngIf="(userService.user.userId == proposal.student.evaluator1.lect_id || userService.user.userId == proposal.student.evaluator2.lect_id)" color="warning" (click)="evaluateProposal()">Update</ion-button>	
+		</div>
+	</div>
+
+	
+	<h3>Comment</h3>
+
+	<ol *ngIf="proposal">
+		<li *ngFor="let comment of proposal.comment">
+			{{comment.comment}} - <span *ngIf="comment.author">{{comment.author.name}} ({{comment.author.role}})</span> @ {{comment.timestamp}}
+		</li>
+	</ol>
+	
+	<div *ngIf="userService.user.role != 'student'">
+		<textarea placeholder="enter your comments" [(ngModel)]="commentInput" ></textarea>
+		<ion-button style="--background:#81163F" (click)="addComment()">Add Comment</ion-button>
+	</div>
+<div>

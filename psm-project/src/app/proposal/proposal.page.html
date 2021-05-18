@@ -1,0 +1,35 @@
+<div class="wrapper" style="padding: 1rem;">
+
+<h1>Proposal</h1>
+
+  <h3>Proposal Form: <a href="assets/proposal.pdf" target="_blank" >Download</a></h3>
+
+  <ion-button style="--background:#81163F" (click)="addProposal()">Submit Proposal</ion-button>
+  <ion-button style="--background:#81163F" (click)="viewProposal()">View proposal</ion-button>
+  <h3>My Proposals</h3>
+
+  <table>
+  	<tr>
+  		<th>Proposal Title</th>
+  		<th>Proposal Type</th>
+  		<th>Proposal Status</th>
+      <th>Proposal Form</th>
+      <th>Action</th>
+  	</tr>
+    
+  	<tr *ngFor="let proposal of proposalList">
+  		<td>{{proposal.title}}</td>
+  		<td>{{proposal.type}}</td>
+  		<td>{{proposal.status}}</td>
+      <td>
+        <a *ngIf="proposal.formURL" [href]="proposal.formURL" target="_blank" >Download Form</a>
+      </td>
+      <td><ion-button color="warning" (click)="editProposal(proposal)">Edit</ion-button>
+          <ion-button color="danger" (click)="deleteProposal(proposal)">Delete</ion-button>
+      </td>
+  	</tr>
+
+
+  </table>
+
+</div>
